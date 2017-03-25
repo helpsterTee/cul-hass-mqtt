@@ -1,5 +1,3 @@
-
-
 import sys
 import serial
 import serial.threaded
