@@ -18,6 +18,7 @@ XONXOFF = False
 # Serial Operations
 TIMEOUT = 1 #s
 INIT_SLEEP_TIME = 3 # how many seconds do we wait for the serial device to accept commands?
+LOOP_SLEEP_TIME = 1 # read serial data every x seconds to prevent high CPU usage
 
 # MQTT Config
 MQTT_SERVER = "127.0.0.1"
@@ -120,6 +121,7 @@ client.connect(MQTT_SERVER, MQTT_PORT, 60)
 client.loop_start()
 
 while(True): # Loopy McLoopface
+	time.sleep(LOOP_SLEEP_TIME) # Sleep every so often to diminish CPU usage
 	if (ser.inWaiting()>0): # Only iterate on data, if there is any
 		data = ser.read(ser.inWaiting())
 		data_str = data.decode('ascii')
